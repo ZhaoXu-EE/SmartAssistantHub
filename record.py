@@ -7,21 +7,21 @@ from collections import deque
 
 class VoiceRecorder:
     def __init__(self):
-        self.CHUNK = 1024  # 每次读取的音频块大小
-        self.FORMAT = pyaudio.paInt16  # 16位格式
-        self.CHANNELS = 1  # 单声道
-        self.RATE = 44100  # 采样率
-        self.THRESHOLD = 3000  # 声音检测阈值
-        self.SILENCE_LIMIT = 2  # 静音判定秒数
-        self.PREV_AUDIO = 0.5  # 保留之前的音频秒数
+        self.CHUNK = 1024  # Size of each audio chunk to read
+        self.FORMAT = pyaudio.paInt16  # 16-bit format
+        self.CHANNELS = 1  # Mono channel
+        self.RATE = 44100  # Sampling rate
+        self.THRESHOLD = 3000  # Sound detection threshold
+        self.SILENCE_LIMIT = 2  # Number of seconds of silence before stopping
+        self.PREV_AUDIO = 0.5  # Seconds of audio to prepend to the recording
         
     def is_silent(self, data_chunk):
-        """判断音频块是否为静音"""
+        """Determines if the audio chunk is silence"""
         return max(data_chunk) < self.THRESHOLD
     
     def record(self, filename="output.wav"):
-        """开始录音并进行语音检测"""
-        print("* 正在初始化录音设备...")
+        """Starts recording with voice detection"""
+        print("* Initializing audio device...")
         
         p = pyaudio.PyAudio()
         stream = p.open(format=self.FORMAT,
@@ -30,7 +30,7 @@ class VoiceRecorder:
                        input=True,
                        frames_per_buffer=self.CHUNK)
         
-        print("* 录音开始，请说话...")
+        print("* Recording started, please speak...")
         
         audio_buffer = []
         rel = array('h')
@@ -38,7 +38,7 @@ class VoiceRecorder:
         silent_time = 0
         started = False
         
-        # 用于存储之前的音频
+        # Buffer for storing previous audio
         prev_audio = deque(maxlen=int(self.PREV_AUDIO * self.RATE / self.CHUNK))
         
         while True:
@@ -48,9 +48,9 @@ class VoiceRecorder:
             
             if not started:
                 if not silent:
-                    print("* 检测到声音，开始记录...")
+                    print("* Sound detected, recording started...")
                     started = True
-                    # 添加之前缓存的音频
+                    # Add previously cached audio
                     audio_buffer.extend(list(prev_audio))
                     audio_buffer.append(cur_data)
                 else:
@@ -65,19 +65,19 @@ class VoiceRecorder:
                 silent_time = 0
             audio_buffer.append(cur_data)
         
-        print("* 检测到静音，录音结束")
+        print("* Silence detected, recording stopped")
         
-        # 停止并关闭流
+        # Stop and close the stream
         stream.stop_stream()
         stream.close()
         p.terminate()
         
-        # 保存录音文件
+        # Save the recording
         self.save_audio(audio_buffer, filename)
         
     def save_audio(self, audio_buffer, filename):
-        """保存录音到文件"""
-        print(f"* 正在保存录音到 {filename}...")
+        """Save the recording to a file"""
+        print(f"* Saving recording to {filename}...")
         
         wf = wave.open(filename, 'wb')
         wf.setnchannels(self.CHANNELS)
@@ -88,7 +88,7 @@ class VoiceRecorder:
         wf.writeframes(array('h', audio_buffer).tobytes())
         wf.close()
         
-        print("* 录音已保存")
+        print("* Recording saved")
 
 if __name__ == "__main__":
     recorder = VoiceRecorder()
