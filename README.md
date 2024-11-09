@@ -35,3 +35,9 @@ python3 -c "import pyaudio; print(pyaudio.__version__)"
 pip install numpy
 python3 -c "import numpy; print(numpy.__version__)"
 ```
+
+### 7. 验证声卡
+连接声卡后，验证是否成功接入：
+```bash
+lsusb | grep -i audio
+```
