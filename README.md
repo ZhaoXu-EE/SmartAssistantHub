@@ -41,3 +41,8 @@ python3 -c "import numpy; print(numpy.__version__)"
 ```bash
 lsusb | grep -i audio
 ```
+
+### 8. 手动加载USB音频驱动模块
+```bash
+sudo modprobe snd-usb-audio
+```
