@@ -46,3 +46,8 @@ lsusb | grep -i audio
 ```bash
 sudo modprobe snd-usb-audio
 ```
+
+### 9. 检查Ångström Linux的内核是否有usb音频模块
+```bash
+ls /lib/modules/$(uname -r)/kernel/sound/usb/
+```
