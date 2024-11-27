@@ -1,5 +1,5 @@
 # SmartAssistantHub
-## 环境配置
+## De10-nano环境配置
 ### 1. 更新软件包
 ```bash
 sudo apt update && sudo apt upgrade
@@ -50,4 +50,23 @@ sudo modprobe snd-usb-audio
 ### 9. 检查Ångström Linux的内核是否有usb音频模块
 ```bash
 ls /lib/modules/$(uname -r)/kernel/sound/usb/
+```
+
+## Raspberry Pi环境配置
+### 1. 更新软件包
+```bash
+sudo apt update && sudo apt upgrade
+```
+### 2. Install the required dependencies
+```bash
+sudo apt install portaudio19-dev python3-dev
+```
+### 3. Install PyAudio and Numpy
+```bash
+pip install pyaudio numpy
+```
+### 4. 验证声卡
+连接声卡后，验证是否成功接入：
+```bash
+lsusb | grep -i audio
 ```
