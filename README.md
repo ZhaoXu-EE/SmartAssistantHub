@@ -53,6 +53,15 @@ ls /lib/modules/$(uname -r)/kernel/sound/usb/
 ```
 
 ## Raspberry Pi环境配置
+### 0. 安装miniconda
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+source ~/miniconda3/bin/activate
+conda init --all
+```
 ### 1. 更新软件包
 ```bash
 sudo apt update && sudo apt upgrade
