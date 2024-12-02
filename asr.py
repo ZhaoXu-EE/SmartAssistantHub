@@ -2,7 +2,7 @@
 from openai import OpenAI
 client = OpenAI()
 
-audio_file= open("/path/to/file/audio.mp3", "rb")
+audio_file= open("/home/xu/workspace/SmartAssistantHub/output.wav", "rb")
 transcription = client.audio.transcriptions.create(
   model="whisper-1", 
   file=audio_file

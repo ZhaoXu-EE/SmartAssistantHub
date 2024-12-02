@@ -19,7 +19,7 @@ class VoiceRecorder:
         """Determines if the audio chunk is silence"""
         return max(data_chunk) < self.THRESHOLD
     
-    def record(self, filename="output.wav"):
+    def record(self, filename="temporary.wav"):
         """Starts recording with voice detection"""
         print("* Initializing audio device...")
         

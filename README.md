@@ -79,3 +79,7 @@ pip install pyaudio numpy
 ```bash
 lsusb | grep -i audio
 ```
+### 5. Install pygame to play audio file
+```bash
+pip install pygame
+```
