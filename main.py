@@ -20,6 +20,9 @@ for _ in range(COUNT):
     if "turn on the light" in transcription.text.lower():
         message_content = "the light is on"
         print(message_content)
+    if "temperature" in transcription.text.lower():
+        message_content = "the temperature is 26 degrees Celsius"
+        print(message_content)
     else: 
 
         completion = client.chat.completions.create(

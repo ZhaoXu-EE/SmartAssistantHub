@@ -11,7 +11,7 @@ class VoiceRecorder:
         self.FORMAT = pyaudio.paInt16  # 16-bit format
         self.CHANNELS = 1  # Mono channel
         self.RATE = 44100  # Sampling rate
-        self.THRESHOLD = 3000  # Sound detection threshold
+        self.THRESHOLD = 4000  # Sound detection threshold
         self.SILENCE_LIMIT = 2  # Number of seconds of silence before stopping
         self.PREV_AUDIO = 0.5  # Seconds of audio to prepend to the recording
         
