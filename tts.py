@@ -32,7 +32,7 @@ client = OpenAI()
 response = client.audio.speech.create(
     model="tts-1",
     voice="alloy",
-    input="Hello world! This is a streaming test.",
+    input="Hello, I am Baymax. Your personal healthcare companion",
 )
 
 # response.stream_to_file("output.mp3")     # 已弃用
